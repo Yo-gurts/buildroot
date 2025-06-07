@@ -1,0 +1,26 @@
+BR2_aarch64=y
+BR2_cortex_a53=y
+BR2_BACKUP_SITE="https://sources.buildroot.net"
+BR2_CPAN_MIRROR="https://cpan.metacpan.org"
+BR2_TOOLCHAIN_EXTERNAL=y
+BR2_TOOLCHAIN_EXTERNAL_CUSTOM=y
+BR2_TOOLCHAIN_EXTERNAL_PATH="host-tools/gcc/arm-gnu-toolchain-11.3.rel1-x86_64-aarch64-none-linux-gnu"
+BR2_TOOLCHAIN_EXTERNAL_CUSTOM_PREFIX="aarch64-none-linux-gnu"
+BR2_TOOLCHAIN_EXTERNAL_GCC_11=y
+BR2_TOOLCHAIN_EXTERNAL_HEADERS_4_20=y
+BR2_TOOLCHAIN_EXTERNAL_CUSTOM_GLIBC=y
+BR2_TOOLCHAIN_EXTERNAL_CXX=y
+BR2_TOOLCHAIN_EXTERNAL_FORTRAN=y
+BR2_TOOLCHAIN_EXTERNAL_INET_RPC=n
+BR2_TOOLCHAIN_EXTERNAL_OPENMP=y
+
+######################################## 登录信息 ########################################
+BR2_TARGET_GENERIC_HOSTNAME="sophgo"
+BR2_TARGET_GENERIC_ISSUE="Welcome to sophgo"
+BR2_TARGET_GENERIC_ROOT_PASSWD="sophgo"
+BR2_ROOTFS_OVERLAY="board/sophgo"
+
+######################################## 文件系统 ########################################
+BR2_TARGET_ROOTFS_EXT2=y
+BR2_TARGET_ROOTFS_EXT2_4=y
+BR2_TARGET_ROOTFS_EXT2_SIZE="200M"
