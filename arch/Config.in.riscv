@@ -45,6 +45,12 @@ config BR2_RISCV_ISA_RVV
 	bool "Vector Instructions (V)"
 	select BR2_ARCH_NEEDS_GCC_AT_LEAST_12
 
+config BR2_RISCV_ISA_RVV0P7
+	bool "Vector Instructions (V0P7) 0.7"
+
+config BR2_RISCV_ISA_THEAD
+	bool "Thread Instructions (XTHEAD)"
+
 choice
 	prompt "Target Architecture Size"
 	default BR2_RISCV_64
@@ -99,6 +105,10 @@ config BR2_RISCV_ABI_LP64F
 config BR2_RISCV_ABI_LP64D
 	bool "lp64d"
 	depends on BR2_ARCH_IS_64 && BR2_RISCV_ISA_RVD
+
+config BR2_RISCV_ABI_LP64V
+	bool "lp64v"
+	depends on BR2_ARCH_IS_64 && BR2_RISCV_ISA_RVV
 endchoice
 
 config BR2_ARCH
@@ -118,6 +128,7 @@ config BR2_GCC_TARGET_ABI
 	default "lp64" if BR2_RISCV_ABI_LP64
 	default "lp64f" if BR2_RISCV_ABI_LP64F
 	default "lp64d" if BR2_RISCV_ABI_LP64D
+	default "lp64v" if BR2_RISCV_ABI_LP64V
 
 config BR2_READELF_ARCH_NAME
 	default "RISC-V"

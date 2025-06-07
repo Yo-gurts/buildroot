@@ -140,8 +140,13 @@ copy_toolchain_sysroot = \
 			$(call simplify_symlink,$$i,$(STAGING_DIR)) ; \
 		done ; \
 	fi ; \
-	if [[ ! $$(find $(STAGING_DIR)/lib -name 'ld*.so.*' -print -quit) ]]; then \
-		find $${ARCH_SYSROOT_DIR}/lib -name 'ld*.so.*' -print0 | xargs -0 -I % cp % $(STAGING_DIR)/lib/; \
+	if [ "$(TOOLCHAIN_EXTERNAL_CC)" != "" ]; then \
+		LD_NAME=`echo "" | $(TOOLCHAIN_EXTERNAL_CC) $(TOOLCHAIN_EXTERNAL_CFLAGS) -v -xc - 2>&1 | grep -oP '\-dynamic-linker /lib/\K[\/\-\.\w]+'`; \
+	else \
+		LD_NAME="ld*.so.*"; \
+	fi; \
+	if [[ ! $$(find $(STAGING_DIR)/lib -name $${LD_NAME} -print -quit) ]]; then \
+		find $${ARCH_SYSROOT_DIR}/lib -name $${LD_NAME} -print0 | xargs -0 -I % sh -c 'cp % $(STAGING_DIR)/lib/' ; \
 	fi ; \
 	if [ `readlink -f $${SYSROOT_DIR}` != `readlink -f $${ARCH_SYSROOT_DIR}` ] ; then \
 		if [ ! -d $${ARCH_SYSROOT_DIR}/usr/include ] ; then \
